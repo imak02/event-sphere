@@ -1,13 +1,46 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
 
   const handleEyeClick = () => {
     setShowPassword((prev) => !prev);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios({
+        method: "post",
+        url: "/user/login",
+        data: { user, password },
+      });
+
+      console.log(response);
+      if (response) {
+        authCtx.login(response.data.data.token);
+        toast.success(response.data.message, {
+          theme: "colored",
+        });
+
+        setUser("");
+        setPassword("");
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      console.log(error);
+    }
   };
 
   return (
@@ -19,7 +52,7 @@ const Login = () => {
         <h1 className="text-3xl text-red-600 m-2 font-semibold">
           Welcome back !
         </h1>
-        <form className="w-full my-4">
+        <form className="w-full my-4" onSubmit={handleSubmit}>
           <div className="flex items-start justify-center flex-col mb-2">
             <label className="text-xl font-light" htmlFor="user">
               Username/Email:
@@ -29,9 +62,9 @@ const Login = () => {
               type="text"
               name="user"
               id="user"
-              value={email}
+              value={user}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setUser(e.target.value);
               }}
             />
           </div>
