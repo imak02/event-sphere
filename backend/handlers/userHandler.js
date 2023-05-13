@@ -40,6 +40,7 @@ const register = async (req, res) => {
       name,
       username,
       email,
+      phone,
       password,
     });
 
@@ -109,4 +110,81 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+//Get a user with userid
+const getUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const foundUser = await User.findById(userId);
+
+    if (!foundUser) {
+      return res.status(400).send({
+        success: false,
+        message: "The requested user does not exist.",
+        data: null,
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: "User fetched successfully",
+      data: foundUser,
+    });
+  } catch (error) {
+    errorHandler({ error, res });
+  }
+};
+
+//Get current logged in user
+const getCurrentUser = async (req, res) => {
+  try {
+    const user = req.user;
+
+    const userId = user._id;
+
+    const currentUser = await User.findById(userId);
+
+    // const currentUser = await User.findOne({
+    //   _id: mongoose.Types.ObjectId(userId.toString()),
+    // });
+
+    if (!currentUser) {
+      return res.status(400).send({
+        success: false,
+        message: "The requested user does not exist",
+        data: null,
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: "The requested user was found",
+      data: currentUser,
+    });
+  } catch (error) {
+    errorHandler({ error, res });
+  }
+};
+
+//Get All Users
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    if (!users) {
+      return res.status(400).send({
+        success: false,
+        message: "There are no users available",
+        data: null,
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: "All users fetched successfully",
+      data: users,
+    });
+  } catch (error) {
+    errorHandler({ error, res });
+  }
+};
+
+module.exports = { register, login, getUser, getCurrentUser, getAllUsers };
