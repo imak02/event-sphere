@@ -35,7 +35,11 @@ const Login = () => {
 
         setUser("");
         setPassword("");
-        navigate("/");
+        if (response.data.data.role === "ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
