@@ -75,7 +75,7 @@ const login = async (req, res) => {
 
     const foundUser = await User.findOne({
       $or: [{ email: user }, { username: user }],
-    }).select(["username", "email", "password"]);
+    }).select(["username", "email", "password", "role"]);
 
     if (!foundUser) {
       return res.status(400).send({
@@ -103,7 +103,12 @@ const login = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Login Successful",
-      data: { userName: foundUser.userName, email: foundUser.email, token },
+      data: {
+        userName: foundUser.userName,
+        email: foundUser.email,
+        role: foundUser.role,
+        token,
+      },
     });
   } catch (error) {
     errorHandler({ error, res });
