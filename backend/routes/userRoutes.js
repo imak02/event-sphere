@@ -1,4 +1,6 @@
 const express = require("express");
+const router = express.Router();
+
 const {
   register,
   login,
@@ -7,8 +9,6 @@ const {
   getAllUsers,
 } = require("../handlers/userHandler");
 const { checkAuth } = require("../middlewares/checkAuth");
-
-const router = express.Router();
 
 //User Registration Route
 router.post("/register", register);
