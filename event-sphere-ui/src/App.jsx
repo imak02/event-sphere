@@ -9,6 +9,7 @@ import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 import Users from "./pages/Users";
 import Events from "./pages/Events";
+import AddEvent from "./pages/AddEvent";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/add-event",
+        element: <AddEvent />,
       },
     ],
   },

@@ -5,6 +5,7 @@ const Homepage = () => {
   return (
     <div className="flex flex-col items-center justify-around min-h-screen">
       <div className="container mt-52">
+        <Link to="/admin/">Admin</Link>
         <div>
           <h2 className="text-3xl font-medium text-center">Popular Events</h2>
         </div>

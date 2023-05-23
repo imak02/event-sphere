@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Events = () => {
   const [events, setEvents] = useState(null);
@@ -28,6 +29,9 @@ const Events = () => {
 
   return (
     <div>
+      <Link to="/add-event">
+        <button>Add Event</button>
+      </Link>
       {events?.length > 0 ? (
         <table>
           <thead>
