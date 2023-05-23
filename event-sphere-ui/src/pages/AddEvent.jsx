@@ -167,16 +167,11 @@ const AddEvent = () => {
                   name="category"
                   className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
                 >
-                  {/* <option value="choose" unselectable="on">
-                    Choose your category
-                  </option> */}
-                  <optgroup label="Choose your category">
-                    <option value="business">Business</option>
-                    <option value="sports">Sports</option>
-                    <option value="technology">Technology</option>
-                    <option value="education">Education</option>
-                    <option value="entertainment">Entertainment</option>
-                  </optgroup>
+                  <option value="business">Business</option>
+                  <option value="sports">Sports</option>
+                  <option value="technology">Technology</option>
+                  <option value="education">Education</option>
+                  <option value="entertainment">Entertainment</option>
                 </Field>
                 <ErrorMessage
                   component="p"

@@ -1,7 +1,35 @@
 import { Link } from "react-router-dom";
 import EventCard from "../components/EventCard";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Homepage = () => {
+  const [events, setEvents] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const getEvents = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("/event/all");
+        setEvents(response.data.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+    getEvents();
+  }, []);
+
+  console.log(events);
+
+  if (loading)
+    return (
+      <div className="loading grid justify-center items-center min-h-[300px]">
+        <img src="/loading.gif" className="h-[100px] " alt="spinner" />
+      </div>
+    );
   return (
     <div className="flex flex-col items-center justify-around min-h-screen">
       <div className="container mt-52">
@@ -37,12 +65,18 @@ const Homepage = () => {
           </Link>
         </div>
         <div className="flex flex-wrap justify-center  gap-4">
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
+          {events?.map((event, index) => (
+            <EventCard
+              key={event._id}
+              title={event.title}
+              image={event.image}
+              details={event.details}
+              capacity={event.capacity}
+              category={event.category}
+              location={event.location}
+              date={event.date}
+            />
+          ))}
         </div>
       </div>
     </div>
