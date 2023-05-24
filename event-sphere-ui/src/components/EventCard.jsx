@@ -33,7 +33,7 @@ const EventCard = ({
           <p>
             <i className="fa-solid fa-calendar-days mr-1 text-red-500"></i>
 
-            {new Date(date).toLocaleString()}
+            {new Date(date).toDateString()}
           </p>
           <p>
             <i className="fa-solid fa-location-dot mr-1 text-red-500"></i>

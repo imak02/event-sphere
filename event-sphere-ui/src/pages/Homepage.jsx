@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -38,31 +38,90 @@ const Homepage = () => {
           <h2 className="text-3xl font-medium text-center">Popular Events</h2>
         </div>
         <div className="flex justify-center flex-wrap items-center md:gap-10 p-2 h-auto md:h-20">
-          <Link to="/">
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "active border border-red-600 text-red-600"
+                : ""
+            }
+          >
+            <p className="text-xl font-medium p-2 hover:border hover:border-red-600 hover:text-red-600">
+              All
+            </p>
+          </NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "active border border-red-600 text-red-600"
+                : ""
+            }
+          >
             <p className="text-xl font-medium p-2 hover:border hover:border-red-600 hover:text-red-600">
               Business
             </p>
-          </Link>
-          <Link to="/">
+          </NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "active border border-red-600 text-red-600"
+                : ""
+            }
+          >
             <p className="text-xl font-medium p-2 hover:border hover:border-red-600 hover:text-red-600">
               Sports
             </p>
-          </Link>
-          <Link to="/">
+          </NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "active border border-red-600 text-red-600"
+                : ""
+            }
+          >
             <p className="text-xl font-medium p-2 hover:border hover:border-red-600 hover:text-red-600">
               Technology
             </p>
-          </Link>
-          <Link to="/">
+          </NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "active border border-red-600 text-red-600"
+                : ""
+            }
+          >
             <p className="text-xl font-medium p-2 hover:border hover:border-red-600 hover:text-red-600">
               Education
             </p>
-          </Link>
-          <Link to="/">
+          </NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "active border border-red-600 text-red-600"
+                : ""
+            }
+          >
             <p className="text-xl font-medium p-2 hover:border hover:border-red-600 hover:text-red-600">
               Entertainment
             </p>
-          </Link>
+          </NavLink>
         </div>
         <div className="flex flex-wrap justify-center  gap-4">
           {events?.map((event, index) => (
