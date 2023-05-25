@@ -98,6 +98,23 @@ const getEvent = async (req, res) => {
 //Get All Events
 const getAllEvents = async (req, res) => {
   try {
+    const category = req.query.cat;
+    if (category) {
+      const events = await Event.find({ category: category });
+      if (!events) {
+        return res.status(400).send({
+          success: false,
+          message: "There are no events available.",
+          data: null,
+        });
+      }
+
+      return res.status(200).send({
+        success: true,
+        message: "All events fetched successfully",
+        data: events,
+      });
+    }
     const events = await Event.find();
     if (!events) {
       return res.status(400).send({

@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -7,11 +7,14 @@ import axios from "axios";
 const Homepage = () => {
   const [events, setEvents] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { search } = useLocation();
+  console.log(search);
+
   useEffect(() => {
     const getEvents = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("/event/all");
+        const response = await axios.get(`/event/all${search}`);
         setEvents(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -20,7 +23,7 @@ const Homepage = () => {
       }
     };
     getEvents();
-  }, []);
+  }, [search]);
 
   if (loading)
     return (
@@ -51,7 +54,7 @@ const Homepage = () => {
             </p>
           </NavLink>
           <NavLink
-            to="/"
+            to="?cat=business"
             className={({ isActive, isPending }) =>
               isPending
                 ? "pending"
@@ -65,7 +68,7 @@ const Homepage = () => {
             </p>
           </NavLink>
           <NavLink
-            to="/"
+            to="/?cat=sports"
             className={({ isActive, isPending }) =>
               isPending
                 ? "pending"
@@ -79,7 +82,7 @@ const Homepage = () => {
             </p>
           </NavLink>
           <NavLink
-            to="/"
+            to="/?cat=technology"
             className={({ isActive, isPending }) =>
               isPending
                 ? "pending"
@@ -93,7 +96,7 @@ const Homepage = () => {
             </p>
           </NavLink>
           <NavLink
-            to="/"
+            to="/?cat=education"
             className={({ isActive, isPending }) =>
               isPending
                 ? "pending"
@@ -107,7 +110,7 @@ const Homepage = () => {
             </p>
           </NavLink>
           <NavLink
-            to="/"
+            to="/?cat=entertainment"
             className={({ isActive, isPending }) =>
               isPending
                 ? "pending"

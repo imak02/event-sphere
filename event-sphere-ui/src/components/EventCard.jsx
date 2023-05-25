@@ -65,6 +65,7 @@ const EventCard = ({
           >
             Book Now
           </button>
+          <p>{category}</p>
           <i className="fa-solid fa-share-nodes text-red-500"></i>
         </div>
       </div>
