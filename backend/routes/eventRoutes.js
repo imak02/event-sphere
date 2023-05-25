@@ -6,6 +6,7 @@ const {
   getEvent,
   updateEvent,
   deleteEvent,
+  admitUser,
 } = require("../handlers/eventHandler");
 const { checkAuth } = require("../middlewares/checkAuth");
 const router = express.Router();
@@ -24,5 +25,8 @@ router.put("/:eventId", checkAuth, eventImageMiddleware, updateEvent);
 
 //Delete event
 router.delete("/:eventId", deleteEvent);
+
+//Admit User
+router.post("/:eventId/admit", checkAuth, admitUser);
 
 module.exports = router;

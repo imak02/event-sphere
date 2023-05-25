@@ -168,6 +168,48 @@ const deleteEvent = async (req, res) => {
   }
 };
 
+//Add user to event
+const admitUser = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const eventId = req.params.eventId;
+
+    if (!userId) {
+      return res.status(400).send({
+        success: false,
+        message: "Unauthorized request",
+        data: null,
+      });
+    }
+
+    const foundEvent = await Event.findById(eventId);
+
+    if (foundEvent.users.length >= foundEvent.capacity) {
+      return res.status(400).send({
+        success: false,
+        message: "The event is already full. Please try other events",
+        data: null,
+      });
+    }
+
+    foundEvent.users.push(userId);
+
+    const foundUser = await User.findById(userId);
+    foundUser.events.push(eventId);
+
+    foundUser.save();
+    foundEvent.save();
+
+    return res.status(200).send({
+      success: true,
+      message: "Admitted to the event successfully",
+      data: foundEvent,
+    });
+  } catch (error) {
+    errorHandler({ error, res });
+  }
+};
+
 module.exports = {
   eventImageMiddleware,
   addEvent,
@@ -175,4 +217,5 @@ module.exports = {
   getAllEvents,
   updateEvent,
   deleteEvent,
+  admitUser,
 };
