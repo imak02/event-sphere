@@ -1,8 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EventCard = ({
+  id,
   title,
   image,
   details,
@@ -12,6 +14,19 @@ const EventCard = ({
   capacity,
 }) => {
   const baseURL = "http://localhost:8000";
+
+  const admitToEvent = async () => {
+    try {
+      const response = await axios.post(`/event/${id}/admit`);
+      toast.success(response.data.message, {
+        theme: "colored",
+      });
+      console.log(response);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      console.log(error);
+    }
+  };
   return (
     <div className="max-w-md flex flex-col border-2 bg-white gap-4 rounded-lg m-2 ">
       <div className="relative">
@@ -44,11 +59,12 @@ const EventCard = ({
           <h3 className="text-2xl font-medium">{title}</h3>
         </div>
         <div className="flex justify-between items-center">
-          <Link to="/">
-            <p className="text-lg font-medium text-red-500 hover:underline">
-              Book Now
-            </p>
-          </Link>
+          <button
+            className="text-lg font-medium text-red-500 hover:underline"
+            onClick={admitToEvent}
+          >
+            Book Now
+          </button>
           <i className="fa-solid fa-share-nodes text-red-500"></i>
         </div>
       </div>

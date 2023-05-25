@@ -22,8 +22,6 @@ const Homepage = () => {
     getEvents();
   }, []);
 
-  console.log(events);
-
   if (loading)
     return (
       <div className="loading grid justify-center items-center min-h-[300px]">
@@ -126,6 +124,7 @@ const Homepage = () => {
         <div className="flex flex-wrap justify-center  gap-4">
           {events?.map((event, index) => (
             <EventCard
+              id={event._id}
               key={event._id}
               title={event.title}
               image={event.image}

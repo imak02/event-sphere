@@ -96,7 +96,7 @@ const AddEvent = () => {
 
                 <Field
                   className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
-                  type="date"
+                  type="datetime-local"
                   name="date"
                   id="date"
                 />
