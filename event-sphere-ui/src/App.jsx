@@ -9,7 +9,10 @@ import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 import Users from "./pages/Users";
 import Events from "./pages/Events";
+import AdminEvents from "./pages/AdminEvents";
 import AddEvent from "./pages/AddEvent";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +32,19 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+
+      {
+        path: "/events",
+        element: <Events />,
       },
       {
         path: "/register",
@@ -56,7 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin/events",
-        element: <Events />,
+        element: <AdminEvents />,
       },
       {
         path: "/admin/lists",
