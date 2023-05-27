@@ -8,7 +8,6 @@ const Homepage = () => {
   const [events, setEvents] = useState(null);
   const [loading, setLoading] = useState(true);
   const { search } = useLocation();
-  console.log(search);
 
   useEffect(() => {
     const getEvents = async () => {
