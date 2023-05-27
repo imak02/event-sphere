@@ -4,39 +4,14 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Carousel from "../components/Carousel";
-import Banner from "../components/Banner";
+import HomeBanner from "../components/HomeBanner";
 import ServiceCard from "../components/ServiceCard";
 import Gallery from "../components/Gallery";
 
 const Homepage = () => {
-  const [events, setEvents] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { search } = useLocation();
-
-  useEffect(() => {
-    const getEvents = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(`/event/all${search}`);
-        setEvents(response.data.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-    getEvents();
-  }, [search]);
-
-  if (loading)
-    return (
-      <div className="loading grid justify-center items-center min-h-[300px]">
-        <img src="/loading.gif" className="h-[100px] " alt="spinner" />
-      </div>
-    );
   return (
     <div className="flex flex-col items-center justify-around min-h-screen">
-      <Banner />
+      <HomeBanner />
       <div className="mt-20 max-w-3xl p-3">
         <h2 className="text-3xl md:text-5xl text-center mb-10 font-bold font-pacifico">
           Welcome to <span className="text-orange-500">Dvents</span>
