@@ -21,7 +21,6 @@ const Contact = () => {
 
         <div className=" p-2 sm:flex sm:gap-10 items-center justify-center">
           <ContactCard
-            color="red"
             name="Address"
             value="Kathmandu-32, Koteshwor"
             logo={
@@ -29,13 +28,11 @@ const Contact = () => {
             }
           />
           <ContactCard
-            color="green"
             name="Phone"
             value="01-422369, 9846052525"
             logo={<i className="fa-solid fa-phone text-5xl self-end"></i>}
           />
           <ContactCard
-            color="blue"
             name="Email"
             value="info@dvents.com"
             logo={<i className="fa-solid fa-envelope text-5xl self-end"></i>}
