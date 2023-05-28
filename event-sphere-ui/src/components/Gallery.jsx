@@ -43,7 +43,10 @@ const Gallery = () => {
       </div>
       <div className="flex flex-wrap gap-5 items-center justify-center mt-10">
         {images.map((image, index) => (
-          <div key={index} className=" w-80 hover:scale-110 cursor-pointer">
+          <div
+            key={index}
+            className=" w-80 hover:scale-110 cursor-pointer duration-300 ease-in-out"
+          >
             <img src={image.url} alt="gallery" />
           </div>
         ))}

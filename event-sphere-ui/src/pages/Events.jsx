@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import axios from "axios";
+import EventGridCard from "../components/EventGridCard";
 
 const Events = () => {
   const [events, setEvents] = useState(null);
@@ -125,9 +126,9 @@ const Events = () => {
             </p>
           </NavLink>
         </div>
-        <div className="flex flex-wrap justify-center  gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           {events?.map((event, index) => (
-            <EventCard
+            <EventGridCard
               id={event._id}
               key={event._id}
               title={event.title}
@@ -146,3 +147,17 @@ const Events = () => {
 };
 
 export default Events;
+
+{
+  /* <EventCard
+              id={event._id}
+              key={event._id}
+              title={event.title}
+              image={event.image}
+              details={event.details}
+              capacity={event.capacity}
+              category={event.category}
+              location={event.location}
+              date={event.date}
+            /> */
+}

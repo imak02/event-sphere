@@ -13,6 +13,7 @@ import AdminEvents from "./pages/AdminEvents";
 import AddEvent from "./pages/AddEvent";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import EventDetails from "./pages/EventDetails";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/events",
         element: <Events />,
+      },
+      {
+        path: "/event/:eventId",
+        element: <EventDetails />,
       },
       {
         path: "/register",

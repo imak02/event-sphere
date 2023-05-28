@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="bg-pink-50 flex justify-center items-center">
         <div className="flex flex-col md:flex-row gap-10 py-20 container px-2">
           <div className="flex-[2] my-4 text-left">
-            <img src="logo3.png" alt="logo" className="py-4" />
+            <img src="/logo3.png" alt="logo" className="py-4" />
             <p className="font-serif italic md:w-2/3 text-xl">
               Creating unforgettable moments is our passion. As an event
               management company, we specialize in crafting exceptional

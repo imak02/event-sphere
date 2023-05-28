@@ -31,7 +31,7 @@ const Navbar = () => {
             {/* <h1 className="text-3xl font-bold hover:scale-110 hover:translate-x-1">
               EventXcel
             </h1> */}
-            <img src="logo3.png" alt="logo" />
+            <img src="/logo3.png" alt="logo" />
           </Link>
         </div>
         <div className="hidden lg:flex justify-center items-center gap-5">
