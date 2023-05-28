@@ -12,9 +12,6 @@ const MyNavLink = ({ to, name }) => {
           ? "active border-4 border-orange-600 text-orange-500 rounded-md p-2 m-2"
           : "m-2 p-2 border-transparent border-4 hover:border-4 hover:border-orange-600 hover:text-orange-500 hover:rounded-md before:block before: "
       }
-      onClick={() => {
-        setIsOpen(false);
-      }}
     >
       <h3 className="text-xl font-semibold">{name}</h3>
     </NavLink>
@@ -91,7 +88,12 @@ const Navbar = () => {
         </div>
       </div>
       {isOpen && (
-        <div className=" bg-pink-50 flex flex-col justify-center items-center">
+        <div
+          className=" bg-pink-50 flex flex-col justify-center items-center"
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        >
           <MyNavLink to="/" name="Home" />
           <MyNavLink to="/about" name="About" />
           <MyNavLink to="/events" name="Events" />
