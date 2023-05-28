@@ -3,12 +3,14 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const AddEvent = () => {
   const navigate = useNavigate();
   return (
     <div className="flex items-center justify-center min-h-screen  ">
-      <div className="border-2 border-red-600 rounded-md flex items-center justify-center flex-col p-2 md:p-4 w-full max-w-2xl bg-[#FFEAD2]ainer">
+      <div className="border-2 border-orange-600 rounded-sm flex items-center justify-center flex-col p-2 md:p-4 w-full max-w-2xl bg-[#FFEAD2]ainer">
         <Formik
           initialValues={{
             title: "",
@@ -18,6 +20,7 @@ const AddEvent = () => {
             location: "",
             capacity: "",
             category: "",
+            organizer: "",
           }}
           onSubmit={async (values, actions) => {
             const formData = new FormData();
@@ -28,6 +31,7 @@ const AddEvent = () => {
             formData.append("location", values.location);
             formData.append("capacity", values.capacity);
             formData.append("category", values.category);
+            formData.append("organizer", values.organizer);
 
             try {
               const response = await axios({
@@ -40,7 +44,7 @@ const AddEvent = () => {
               console.log(response);
               if (response) {
                 toast.success(response.data.message, {
-                  theme: "colored",
+                  theme: "coloorange",
                 });
                 actions.resetForm();
 
@@ -52,40 +56,39 @@ const AddEvent = () => {
             }
           }}
         >
-          {({ setFieldValue }) => (
+          {({ setFieldValue, values }) => (
             <Form className="w-full my-4">
               <div className="flex items-start justify-center flex-col mb-2">
                 <label className="text-xl font-light" htmlFor="title">
                   Title:
                 </label>
                 <Field
-                  className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                  className=" border w-full py-2 px-3 rounded-sm border-orange-200 focus:outline-orange-500"
                   type="text"
                   name="title"
                   id="title"
                 />
                 <ErrorMessage
                   component="p"
-                  className="text-red-500 px-2"
+                  className="text-orange-500 px-2"
                   name="title"
                 />
               </div>
 
               <div className="flex items-start justify-center flex-col mb-2">
-                <label className="text-xl font-light" htmlFor="details">
-                  Details:
+                <label className="text-xl font-light" htmlFor="organizer">
+                  Organizer:
                 </label>
                 <Field
-                  className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
-                  component="textarea"
-                  name="details"
-                  id="details"
+                  className=" border w-full py-2 px-3 rounded-sm border-orange-200 focus:outline-orange-500"
+                  type="text"
+                  name="organizer"
+                  id="organizer"
                 />
-
                 <ErrorMessage
                   component="p"
-                  className="text-red-500 px-2"
-                  name="details"
+                  className="text-orange-500 px-2"
+                  name="organizer"
                 />
               </div>
 
@@ -95,7 +98,7 @@ const AddEvent = () => {
                 </label>
 
                 <Field
-                  className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                  className=" border w-full py-2 px-3 rounded-sm border-orange-200 focus:outline-orange-500"
                   type="datetime-local"
                   name="date"
                   id="date"
@@ -103,7 +106,7 @@ const AddEvent = () => {
 
                 <ErrorMessage
                   component="p"
-                  className="text-red-500 px-2"
+                  className="text-orange-500 px-2"
                   name="date"
                 />
               </div>
@@ -129,14 +132,14 @@ const AddEvent = () => {
                   Location:
                 </label>
                 <Field
-                  className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                  className=" border w-full py-2 px-3 rounded-sm border-orange-200 focus:outline-orange-500"
                   type="text"
                   name="location"
                   id="location"
                 />
                 <ErrorMessage
                   component="p"
-                  className="text-red-500 px-2"
+                  className="text-orange-500 px-2"
                   name="location"
                 />
               </div>
@@ -146,14 +149,14 @@ const AddEvent = () => {
                   Capacity:
                 </label>
                 <Field
-                  className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                  className=" border w-full py-2 px-3 rounded-sm border-orange-200 focus:outline-orange-500"
                   type="number"
                   name="capacity"
                   id="capacity"
                 />
                 <ErrorMessage
                   component="p"
-                  className="text-red-500 px-2"
+                  className="text-orange-500 px-2"
                   name="capacity"
                 />
               </div>
@@ -165,7 +168,7 @@ const AddEvent = () => {
                 <Field
                   as="select"
                   name="category"
-                  className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                  className=" border w-full py-2 px-3 rounded-sm border-orange-200 focus:outline-orange-500"
                 >
                   <option value="business">Business</option>
                   <option value="sports">Sports</option>
@@ -175,14 +178,35 @@ const AddEvent = () => {
                 </Field>
                 <ErrorMessage
                   component="p"
-                  className="text-red-500 px-2"
+                  className="text-orange-500 px-2"
                   name="category"
                 />
               </div>
 
-              <div className="flex justify-between mt-4">
+              <div className="flex items-start justify-center flex-col mb-2">
+                <label className="text-xl font-light" htmlFor="details">
+                  Details:
+                </label>
+                <ReactQuill
+                  className="w-full h-52"
+                  name="details"
+                  theme="snow"
+                  value={values.details}
+                  onChange={(value) => {
+                    setFieldValue("details", value);
+                  }}
+                />
+
+                <ErrorMessage
+                  component="p"
+                  className="text-orange-500 px-2"
+                  name="details"
+                />
+              </div>
+
+              <div className="flex justify-end mt-20">
                 <button
-                  className="bg-red-600 text-white border-red-600 px-4 py-1 rounded-md text-xl font-medium hover:cursor-pointer"
+                  className="bg-orange-500 text-white px-4 py-1 rounded-sm text-xl font-medium hover:bg-orange-600"
                   type="submit"
                 >
                   Add Event
