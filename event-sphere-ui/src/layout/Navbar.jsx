@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContextProvider";
+import axios from "axios";
 
 const MyNavLink = ({ to, name }) => {
   return (
@@ -21,8 +23,27 @@ const MyNavLink = ({ to, name }) => {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
 
-  let isLoggedIn = false;
+  const logout = () => {
+    authCtx.logout();
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const getUser = async () => {
+        try {
+          const response = await axios.get("/user/current-user");
+          authCtx.setUser(response.data.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getUser();
+    }
+  }, [isLoggedIn]);
+
   return (
     <div>
       <div className=" px-2 py-4 bg-pink-50 flex items-center justify-between lg:justify-around">
@@ -45,7 +66,11 @@ const Navbar = () => {
           {isLoggedIn ? (
             <div className="flex">
               <MyNavLink to="/profile" name="Profile" />
-              <MyNavLink to="/logout" name="Logout" />
+              <div className="m-2 p-2 border-transparent border-4 hover:border-4 hover:border-orange-600 hover:text-orange-500 hover:rounded-md before:block before: ">
+                <button className="font-bold" onClick={logout}>
+                  <h3 className="text-xl font-semibold">Logout</h3>
+                </button>
+              </div>
             </div>
           ) : (
             <MyNavLink to="/login" name="Login" />
@@ -74,7 +99,11 @@ const Navbar = () => {
           {isLoggedIn ? (
             <div className="flex">
               <MyNavLink to="/profile" name="Profile" />
-              <MyNavLink to="/logout" name="Logout" />
+              <div className="m-2 p-2 border-transparent border-4 hover:border-4 hover:border-orange-600 hover:text-orange-500 hover:rounded-md before:block before: ">
+                <button className="font-bold" onClick={logout}>
+                  <h3 className="text-xl font-semibold">Logout</h3>
+                </button>
+              </div>
             </div>
           ) : (
             <MyNavLink to="/login" name="Login" />
