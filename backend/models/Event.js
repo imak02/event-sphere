@@ -20,6 +20,9 @@ const eventSchema = new mongoose.Schema({
     enum: ["business", "sports", "technology", "education", "entertainment"],
   },
   users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  organizer: {
+    type: String,
+  },
 });
 
 const Event = mongoose.model("Event", eventSchema);

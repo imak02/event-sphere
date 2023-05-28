@@ -40,8 +40,17 @@ const addEvent = async (req, res) => {
       });
     }
 
-    const { title, details, date, location, capacity, category } = req.body;
-    if (!title || !details || !date || !location || !capacity || !category) {
+    const { title, details, date, location, capacity, category, organizer } =
+      req.body;
+    if (
+      !title ||
+      !details ||
+      !date ||
+      !location ||
+      !capacity ||
+      !category ||
+      !organizer
+    ) {
       return res.status(400).send({
         success: false,
         message: "Insufficient details",
@@ -57,6 +66,7 @@ const addEvent = async (req, res) => {
       image: req.file ? `/${req.file.path}` : null,
       date,
       location,
+      organizer,
     });
 
     if (newEvent) {
@@ -150,6 +160,7 @@ const updateEvent = async (req, res) => {
         location,
         capacity,
         category,
+        organizer,
       },
       { new: true }
     );
@@ -200,6 +211,14 @@ const admitUser = async (req, res) => {
     }
 
     const foundEvent = await Event.findById(eventId);
+
+    if (foundEvent.users.includes(userId)) {
+      return res.status(400).send({
+        success: false,
+        message: "You have already admitted to this event. Visit other events.",
+        data: null,
+      });
+    }
 
     if (foundEvent.users.length >= foundEvent.capacity) {
       return res.status(400).send({
