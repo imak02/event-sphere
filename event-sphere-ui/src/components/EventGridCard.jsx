@@ -10,6 +10,7 @@ const EventGridCard = ({
   location,
   category,
   capacity,
+  organizer,
 }) => {
   return (
     <Link to={`/event/${id}`}>
@@ -32,7 +33,7 @@ const EventGridCard = ({
           <ul className="my-4 ml-8">
             <li className="p-2 text-lg font-serif text-slate-700 font-medium">
               <i className="fa-solid fa-gears mr-1 text-orange-500 w-8"></i>
-              Organized By: John Doe
+              Organized By: {organizer}
             </li>
             <li className="p-2 text-lg font-serif text-slate-700 font-medium">
               <i className="fa-solid fa-location-dot mr-1 text-orange-500 w-8"></i>

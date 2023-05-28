@@ -138,6 +138,7 @@ const Events = () => {
               category={event.category}
               location={event.location}
               date={event.date}
+              organizer={event.organizer}
             />
           ))}
         </div>
