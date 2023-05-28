@@ -24,7 +24,7 @@ router.get("/:eventId", getEvent);
 router.put("/:eventId", checkAuth, eventImageMiddleware, updateEvent);
 
 //Delete event
-router.delete("/:eventId", deleteEvent);
+router.delete("/:eventId", checkAuth, deleteEvent);
 
 //Admit User
 router.post("/:eventId/admit", checkAuth, admitUser);

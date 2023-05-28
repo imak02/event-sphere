@@ -147,8 +147,20 @@ const getAllEvents = async (req, res) => {
 //Update event
 const updateEvent = async (req, res) => {
   try {
+    const userId = req.user._id;
+    const user = await User.findById(userId);
+
+    if (user.role !== "ADMIN") {
+      return res.status(400).send({
+        success: false,
+        message: "Unauthorized request",
+        data: null,
+      });
+    }
+
     const eventId = req.params.eventId;
-    const { title, details, date, location, capacity, category } = req.body;
+    const { title, details, date, location, capacity, category, organizer } =
+      req.body;
 
     const updatedEvent = await Event.findByIdAndUpdate(
       eventId,
@@ -180,6 +192,16 @@ const updateEvent = async (req, res) => {
 //Delete event
 const deleteEvent = async (req, res) => {
   try {
+    const userId = req.user._id;
+    const user = await User.findById(userId);
+
+    if (user.role !== "ADMIN") {
+      return res.status(400).send({
+        success: false,
+        message: "Unauthorized request",
+        data: null,
+      });
+    }
     const eventId = req.params.eventId;
 
     const deleted = await Event.findByIdAndDelete(eventId);

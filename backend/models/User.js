@@ -77,9 +77,13 @@ userSchema.methods.generateOTP = function () {
 };
 
 userSchema.methods.generateToken = function () {
-  const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: "24h",
-  });
+  const token = jwt.sign(
+    { _id: this._id, role: this.role },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "24h",
+    }
+  );
   return token;
 };
 
