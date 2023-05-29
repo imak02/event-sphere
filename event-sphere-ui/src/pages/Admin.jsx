@@ -39,7 +39,7 @@ const Admin = () => {
       <div className="hidden md:flex flex-1 shadow-md bg-orange-100 p-2">
         <Sidebar />
       </div>
-      <div className="flex-[5] min-h-screen p-2 shadow-md bg-white">
+      <div className="flex-[5] min-h-screen p-2 shadow-md bg-orange-50">
         <Outlet context={{ users, events }} />
       </div>
     </div>

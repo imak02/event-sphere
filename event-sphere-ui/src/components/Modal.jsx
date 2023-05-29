@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Modal = ({ header, content, onCancel, onConfirm }) => {
   return (
-    <div className="z-50  absolute p-2 top-5 left-50 bg-orange-100 w-80 md:w-96 shadow-md border border-orange-200">
+    <div className="z-50  absolute p-2 top-5 left-1/2 bg-orange-100 w-80 md:w-96 shadow-md border border-orange-200">
       <div className="border-b-2 border-orange-400 p-2">
         <h2 className="text-2xl font-serif font-medium">{header}</h2>
       </div>
