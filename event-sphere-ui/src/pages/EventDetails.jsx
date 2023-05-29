@@ -3,9 +3,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContextProvider";
+import Modal from "../components/Modal";
 
 const EventDetails = () => {
   const [event, setEvent] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
   const params = useParams();
   const navigate = useNavigate();
   const eventId = params.eventId;
@@ -38,14 +41,38 @@ const EventDetails = () => {
   const editEvent = () => {
     navigate(`/event/update/${eventId}`);
   };
-  const deleteEvent = () => {};
+  const deleteEvent = async () => {
+    setShowModal(true);
+  };
 
   const authCtx = useContext(AuthContext);
   const isAdmin = authCtx.user.role === "ADMIN";
   console.log(isAdmin);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center relative">
+      {showModal && (
+        <Modal
+          header="Delete Event"
+          content="Are you sure you want to delete this? This is irrecoverable"
+          onCancel={() => {
+            console.log("Cancelled");
+            setShowModal(false);
+          }}
+          onConfirm={async () => {
+            try {
+              const response = await axios.delete(`/event/${eventId}`);
+              console.log(response);
+              toast.success(response.data.message);
+              navigate("/events");
+            } catch (error) {
+              console.log(error);
+              toast.error(error?.response?.data?.message);
+            }
+            setShowModal(false);
+          }}
+        />
+      )}
       <div className="container">
         <div className="my-5">
           {isAdmin && (
