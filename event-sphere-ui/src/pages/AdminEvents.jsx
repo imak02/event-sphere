@@ -1,31 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 const AdminEvents = () => {
-  const [events, setEvents] = useState(null);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const getEvents = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get("/event/all");
-        setEvents(response.data.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-    getEvents();
-  }, []);
-
-  if (loading)
-    return (
-      <div className="loading grid justify-center items-center min-h-[300px]">
-        <img src="/loading.gif" className="h-[100px] " alt="spinner" />
-      </div>
-    );
+  const data = useOutletContext();
+  const events = data.events;
 
   return (
     <div>

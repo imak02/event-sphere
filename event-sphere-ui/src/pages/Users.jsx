@@ -1,30 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useOutletContext } from "react-router-dom";
 
 const Users = () => {
-  const [users, setUsers] = useState();
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get("/user/all");
-        setUsers(response.data.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-    getUsers();
-  }, []);
-
-  if (loading)
-    return (
-      <div className="loading grid justify-center items-center min-h-[300px]">
-        <img src="/loading.gif" className="h-[100px] " alt="spinner" />
-      </div>
-    );
+  const { users } = useOutletContext();
 
   return (
     <div className="flex items-center justify-center">
