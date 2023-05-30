@@ -26,7 +26,7 @@ const Dashboard = () => {
         <Link to="/admin">
           <StatsCard
             name="Messages"
-            value="1000"
+            value={data?.messages?.length}
             logo={<i className="fa-solid fa-envelope-open-text"></i>}
           />
         </Link>

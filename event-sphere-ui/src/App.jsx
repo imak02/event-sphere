@@ -15,6 +15,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import EventDetails from "./pages/EventDetails";
 import UpdateEvent from "./pages/UpdateEvent";
+import Messages from "./pages/Messages";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
         path: "/admin/events",
         element: <AdminEvents />,
+      },
+      {
+        path: "/admin/messages",
+        element: <Messages />,
       },
       {
         path: "/admin/lists",

@@ -4,6 +4,8 @@ import ContactCard from "../components/ContactCard";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   return (
@@ -68,8 +70,20 @@ const Contact = () => {
               })}
               onSubmit={async (values, actions) => {
                 try {
-                  console.log(values);
+                  const response = await axios({
+                    method: "post",
+                    url: "/message/add",
+                    data: values,
+                  });
+                  console.log(response);
+                  if (response) {
+                    toast.success(response.data.message, {
+                      theme: "colored",
+                    });
+                    actions.resetForm();
+                  }
                 } catch (error) {
+                  toast.error(error?.response?.data?.message);
                   console.log(error);
                 }
               }}

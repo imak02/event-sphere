@@ -6,6 +6,8 @@ import axios from "axios";
 const Admin = () => {
   const [users, setUsers] = useState("");
   const [events, setEvents] = useState("");
+  const [messages, setMessages] = useState("");
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,9 +16,11 @@ const Admin = () => {
         setLoading(true);
         const userResponse = await axios.get("/user/all");
         const eventResponse = await axios.get("/event/all");
+        const messageResponse = await axios.get("/message/all");
 
         setUsers(userResponse.data.data);
         setEvents(eventResponse.data.data);
+        setMessages(messageResponse.data.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -40,7 +44,7 @@ const Admin = () => {
         <Sidebar />
       </div>
       <div className="flex-[5] min-h-screen p-2 shadow-md bg-orange-50">
-        <Outlet context={{ users, events }} />
+        <Outlet context={{ users, events, messages }} />
       </div>
     </div>
   );
