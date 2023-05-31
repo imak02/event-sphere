@@ -146,7 +146,7 @@ const getCurrentUser = async (req, res) => {
 
     const userId = user._id;
 
-    const currentUser = await User.findById(userId);
+    const currentUser = await User.findById(userId).populate("events");
 
     // const currentUser = await User.findOne({
     //   _id: mongoose.Types.ObjectId(userId.toString()),

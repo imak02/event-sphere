@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import EventGridCard from "../components/EventGridCard";
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -18,10 +19,67 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
-      <div>{user.name}</div>
-      <div>{user.email}</div>
-      <div>{user.username}</div>
+    <div className="flex items-center justify-center">
+      <div className="container p-5">
+        <div className="flex flex-col md:flex-row gap-5">
+          <div className="my-5 flex flex-col gap-5">
+            <div className="flex items-center justify-center flex-col">
+              <div className="h-52 w-52 rounded-full bg-orange-300 overflow-hidden my-5">
+                <img
+                  src="/profile2.jpg"
+                  alt="profile"
+                  height="100%"
+                  width="100%"
+                />
+              </div>
+              <h1 className="text-4xl font-serif font-bold ">{user.name}</h1>
+            </div>
+            <div className=" flex justify-center">
+              <table className="w-80">
+                <tbody>
+                  <tr className="bg-slate-100 border rounded-sm">
+                    <th className="p-3 text-left">Full Name</th>
+                    <td className="p-3 text-left">{user.name}</td>
+                  </tr>
+                  <tr className="bg-slate-100 border rounded-sm">
+                    <th className="p-3 text-left">Email</th>
+                    <td className="p-3 text-left">{user.email}</td>
+                  </tr>
+                  <tr className="bg-slate-100 border rounded-sm">
+                    <th className="p-3 text-left">Username</th>
+                    <td className="p-3 text-left">{user.username}</td>
+                  </tr>
+                  <tr className="bg-slate-100 border rounded-sm">
+                    <th className="p-3 text-left">Phone</th>
+                    <td className="p-3 text-left">{user.phone}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="">
+            <h2 className="text-3xl font-bold font-serif mb-5">
+              Admitted Events
+            </h2>
+            <div className="flex items-center justify-center">
+              {user?.events?.map((event, index) => (
+                <EventGridCard
+                  id={event._id}
+                  key={event._id}
+                  title={event.title}
+                  image={event.image}
+                  details={event.details}
+                  capacity={event.capacity}
+                  category={event.category}
+                  location={event.location}
+                  date={event.date}
+                  organizer={event.organizer}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
