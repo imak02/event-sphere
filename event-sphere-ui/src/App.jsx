@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -16,88 +20,103 @@ import Contact from "./pages/Contact";
 import EventDetails from "./pages/EventDetails";
 import UpdateEvent from "./pages/UpdateEvent";
 import Messages from "./pages/Messages";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: "/",
-        element: <Homepage />,
-      },
-
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-
-      {
-        path: "/events",
-        element: <Events />,
-      },
-      {
-        path: "/event/:eventId",
-        element: <EventDetails />,
-      },
-      {
-        path: "/event/update/:eventId",
-        element: <UpdateEvent />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        path: "/add-event",
-        element: <AddEvent />,
-      },
-    ],
-  },
-  {
-    path: "/admin",
-    element: <Admin />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: "/admin",
-        element: <Dashboard />,
-      },
-
-      {
-        path: "/admin/users",
-        element: <Users />,
-      },
-      {
-        path: "/admin/events",
-        element: <AdminEvents />,
-      },
-      {
-        path: "/admin/messages",
-        element: <Messages />,
-      },
-      {
-        path: "/admin/lists",
-        element: <Dashboard />,
-      },
-    ],
-  },
-]);
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContextProvider";
 
 function App() {
+  const { isLoggedIn } = useContext(AuthContext);
+  console.log(isLoggedIn);
+  const ProtectedRoute = ({ children }) => {
+    if (!isLoggedIn) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      errorElement: <Error />,
+      children: [
+        {
+          path: "/",
+          element: <Homepage />,
+        },
+
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+
+        {
+          path: "/events",
+          element: <Events />,
+        },
+        {
+          path: "/event/:eventId",
+          element: <EventDetails />,
+        },
+        {
+          path: "/event/update/:eventId",
+          element: <UpdateEvent />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/add-event",
+          element: <AddEvent />,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: <Admin />,
+      errorElement: <Error />,
+      children: [
+        {
+          path: "/admin",
+          element: <Dashboard />,
+        },
+
+        {
+          path: "/admin/users",
+          element: <Users />,
+        },
+        {
+          path: "/admin/events",
+          element: <AdminEvents />,
+        },
+        {
+          path: "/admin/messages",
+          element: <Messages />,
+        },
+        {
+          path: "/admin/lists",
+          element: <Dashboard />,
+        },
+      ],
+    },
+  ]);
+
   return (
     <div>
       <RouterProvider router={router} />
