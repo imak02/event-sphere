@@ -46,8 +46,10 @@ const EventDetails = () => {
   };
 
   const authCtx = useContext(AuthContext);
+  const userId = authCtx.user._id;
   const isAdmin = authCtx.user.role === "ADMIN";
-  console.log(isAdmin);
+
+  const isAdmitted = event?.users?.includes(userId);
 
   return (
     <div className="flex items-center justify-center relative">
@@ -118,10 +120,11 @@ const EventDetails = () => {
         ></div>
         <div className="flex items-center justify-end my-5">
           <button
-            className="bg-orange-500 px-4 py-2 rounded-sm text-white font-bold hover:bg-orange-600 m-2"
+            className="bg-orange-500 px-4 py-2 rounded-sm text-white font-bold hover:bg-orange-600 m-2 disabled:bg-gray-600"
             onClick={admitToEvent}
+            disabled={isAdmitted}
           >
-            Admit to Event
+            {isAdmitted ? "Already Admitted" : "Admit to Event"}
           </button>
         </div>
       </div>

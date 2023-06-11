@@ -70,7 +70,10 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <MyNavLink to="/login" name="Login" />
+            <div className="flex gap-5">
+              <MyNavLink to="/login" name="Login" />
+              <MyNavLink to="/register" name="Register" />
+            </div>
           )}
         </div>
 
@@ -108,7 +111,10 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <MyNavLink to="/login" name="Login" />
+            <div className="flex gap-5">
+              <MyNavLink to="/login" name="Login" />
+              <MyNavLink to="/register" name="Register" />
+            </div>
           )}
         </div>
       )}

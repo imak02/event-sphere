@@ -48,21 +48,18 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen  ">
-      <div className="border-2 border-red-600 rounded-md flex items-center justify-center flex-col p-2 md:p-4 w-full max-w-2xl bg-[#FFEAD2]">
-        <div className="h-12 w-12 m-2">
-          <img src="favicon_io/android-chrome-512x512.png" alt="logo" />
-        </div>
-        <h1 className="text-3xl text-red-600 m-2 font-semibold">
-          Welcome back !
+    <div className="flex items-center justify-center min-h-screen font-serif">
+      <div className="flex items-center justify-center flex-col p-2 md:p-4 w-full max-w-2xl border-2 border-black mx-2">
+        <h1 className="text-3xl my-4 font-semibold font-pacifico">
+          Welcome <span className="text-orange-400">back !</span>
         </h1>
         <form className="w-full my-4" onSubmit={handleSubmit}>
-          <div className="flex items-start justify-center flex-col mb-2">
-            <label className="text-xl font-light" htmlFor="user">
+          <div className="flex items-start justify-center flex-col mb-4">
+            <label className="text-xl font-light font-serif" htmlFor="user">
               Username/Email:
             </label>
             <input
-              className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+              className=" border w-full py-2 px-3 rounded-sm border-orange-300 focus:outline-orange-500"
               type="text"
               name="user"
               id="user"
@@ -72,13 +69,13 @@ const Login = () => {
               }}
             />
           </div>
-          <div className="flex items-start justify-center flex-col mb-2">
-            <label className="font-light text-xl" htmlFor="password">
+          <div className="flex items-start justify-center flex-col mb-4">
+            <label className="font-light font-serif text-xl" htmlFor="password">
               Password:
             </label>
             <div className="relative w-full">
               <input
-                className="border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                className="border w-full py-2 px-3 rounded-sm border-orange-300 focus:outline-orange-500"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
@@ -88,7 +85,7 @@ const Login = () => {
                 }}
               />
               <div
-                className="absolute right-2 top-3 text-red-400 hover:cursor-pointer"
+                className="absolute right-2 top-3 text-orange-400 hover:cursor-pointer"
                 onClick={handleEyeClick}
               >
                 {showPassword ? (
@@ -99,13 +96,13 @@ const Login = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-between mt-4">
+          <div className="flex justify-between mt-8">
             <Link to="/register">
               <p className="text-blue-600 text-lg">Forgot Password?</p>
             </Link>
 
             <button
-              className="bg-red-600 text-white border-red-600 px-4 py-1 rounded-md text-xl font-medium hover:cursor-pointer"
+              className="bg-orange-600 text-white border-orange-600 px-4 py-1 rounded-sm text-xl font-medium hover:cursor-pointer"
               type="submit"
             >
               Login

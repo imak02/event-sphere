@@ -18,13 +18,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex items-center justify-center min-h-screen  ">
-      <div className="border-2 border-red-600 rounded-md flex items-center justify-center flex-col p-2 md:p-4 w-full max-w-2xl bg-[#FFEAD2]">
-        <div className="h-12 w-12 m-2">
-          <img src="favicon_io/android-chrome-512x512.png" alt="logo" />
-        </div>
-        <h1 className="text-3xl text-red-600 m-2 font-semibold">
-          Hello there !
+    <div className="flex items-center justify-center min-h-screen font-serif mx-2">
+      <div className="border-2 border-black rounded-sm flex items-center justify-center flex-col p-2 md:p-4 w-full max-w-2xl">
+        <h1 className="text-3xl my-4 font-semibold font-pacifico">
+          Hello <span className="text-orange-400">there !</span>
         </h1>
         <Formik
           initialValues={{
@@ -100,14 +97,14 @@ const Register = () => {
                 Name:
               </label>
               <Field
-                className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                className=" border w-full py-2 px-3 rounded-sm border-orange-300 focus:outline-orange-500"
                 type="text"
                 name="name"
                 id="name"
               />
               <ErrorMessage
                 component="p"
-                className="text-red-500 px-2"
+                className="text-orange-500 px-2"
                 name="name"
               />
             </div>
@@ -117,7 +114,7 @@ const Register = () => {
                 Email:
               </label>
               <Field
-                className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                className=" border w-full py-2 px-3 rounded-sm border-orange-300 focus:outline-orange-500"
                 type="email"
                 name="email"
                 id="email"
@@ -125,7 +122,7 @@ const Register = () => {
 
               <ErrorMessage
                 component="p"
-                className="text-red-500 px-2"
+                className="text-orange-500 px-2"
                 name="email"
               />
             </div>
@@ -135,14 +132,14 @@ const Register = () => {
                 Username:
               </label>
               <Field
-                className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                className=" border w-full py-2 px-3 rounded-sm border-orange-300 focus:outline-orange-500"
                 type="text"
                 name="username"
                 id="username"
               />
               <ErrorMessage
                 component="p"
-                className="text-red-500 px-2"
+                className="text-orange-500 px-2"
                 name="username"
               />
             </div>
@@ -152,14 +149,14 @@ const Register = () => {
                 Phone:
               </label>
               <Field
-                className=" border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                className=" border w-full py-2 px-3 rounded-sm border-orange-300 focus:outline-orange-500"
                 type="text"
                 name="phone"
                 id="phone"
               />
               <ErrorMessage
                 component="p"
-                className="text-red-500 px-2"
+                className="text-orange-500 px-2"
                 name="phone"
               />
             </div>
@@ -170,18 +167,18 @@ const Register = () => {
               </label>
               <div className="relative w-full">
                 <Field
-                  className="border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                  className="border w-full py-2 px-3 rounded-sm border-orange-300 focus:outline-orange-500"
                   type={showPassword1 ? "text" : "password"}
                   name="password1"
                   id="password1"
                 />
                 <ErrorMessage
                   component="p"
-                  className="text-red-500 px-2"
+                  className="text-orange-500 px-2"
                   name="password1"
                 />
                 <div
-                  className="absolute right-2 top-3 text-red-400 hover:cursor-pointer"
+                  className="absolute right-2 top-3 text-orange-400 hover:cursor-pointer"
                   onClick={() => {
                     setShowPassword1((prev) => !prev);
                   }}
@@ -201,18 +198,18 @@ const Register = () => {
               </label>
               <div className="relative w-full">
                 <Field
-                  className="border w-full py-2 px-3 rounded-md border-red-200 focus:outline-red-500"
+                  className="border w-full py-2 px-3 rounded-sm border-orange-300 focus:outline-orange-500"
                   type={showPassword2 ? "text" : "password"}
                   name="password2"
                   id="password2"
                 />
                 <ErrorMessage
                   component="p"
-                  className="text-red-500 px-2"
+                  className="text-orange-500 px-2"
                   name="password2"
                 />
                 <div
-                  className="absolute right-2 top-3 text-red-400 hover:cursor-pointer"
+                  className="absolute right-2 top-3 text-orange-400 hover:cursor-pointer"
                   onClick={() => {
                     setShowPassword2((prev) => !prev);
                   }}
@@ -231,7 +228,7 @@ const Register = () => {
               </Link>
 
               <button
-                className="bg-red-600 text-white border-red-600 px-4 py-1 rounded-md text-xl font-medium hover:cursor-pointer"
+                className="bg-orange-600 text-white border-orange-600 px-4 py-1 rounded-sm text-xl font-medium hover:cursor-pointer"
                 type="submit"
               >
                 Register

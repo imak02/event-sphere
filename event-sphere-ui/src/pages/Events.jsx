@@ -38,21 +38,48 @@ const Events = () => {
     <div>
       <Banner header="Events By Us" />
 
-      <div className="flex flex-wrap justify-center items-center gap-4">
-        {events?.map((event, index) => (
-          <EventGridCard
-            id={event._id}
-            key={event._id}
-            title={event.title}
-            image={event.image}
-            details={event.details}
-            capacity={event.capacity}
-            category={event.category}
-            location={event.location}
-            date={event.date}
-            organizer={event.organizer}
-          />
-        ))}
+      <div className="mt-5">
+        <h2 className="text-center font-bold font-pacifico text-4xl py-5">
+          Upcoming <span className="text-orange-400">Events</span>
+        </h2>
+        <div className="flex flex-wrap justify-center items-center gap-4">
+          {events?.map((event, index) => (
+            <EventGridCard
+              id={event._id}
+              key={event._id}
+              title={event.title}
+              image={event.image}
+              details={event.details}
+              capacity={event.capacity}
+              category={event.category}
+              location={event.location}
+              date={event.date}
+              organizer={event.organizer}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-16">
+        <h2 className="text-center font-bold font-pacifico text-4xl py-5">
+          Recent <span className="text-orange-400">Events</span>
+        </h2>
+        <div className="flex flex-wrap justify-center items-center gap-4">
+          {events?.map((event, index) => (
+            <EventGridCard
+              id={event._id}
+              key={event._id}
+              title={event.title}
+              image={event.image}
+              details={event.details}
+              capacity={event.capacity}
+              category={event.category}
+              location={event.location}
+              date={event.date}
+              organizer={event.organizer}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
