@@ -7,6 +7,8 @@ const {
   getUser,
   getCurrentUser,
   getAllUsers,
+  updateUser,
+  userImageMiddleware,
 } = require("../handlers/userHandler");
 const { checkAuth } = require("../middlewares/checkAuth");
 
@@ -24,5 +26,8 @@ router.get("/all", getAllUsers);
 
 //Get specific User
 router.get("/:userId", getUser);
+
+//Update User
+router.put("/update", checkAuth, userImageMiddleware, updateUser);
 
 module.exports = router;

@@ -2,6 +2,31 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const errorHandler = require("../utils/errorHandler");
+const { request } = require("express");
+const multer = require("multer");
+const { profileMulterStorage } = require("../utils/imageHandler");
+const { multerFilter } = require("../utils/imageHandler");
+
+//File Upload logic
+const upload = multer({
+  dest: "uploads/user",
+  storage: profileMulterStorage,
+  fileFilter: multerFilter,
+  //If you want to limit file size, use this
+  //   limits: {
+  //     fileSize: 1024 * 1024,
+  //   },
+});
+const uploadUserImage = upload.single("image");
+
+const userImageMiddleware = async (req, res, next) => {
+  uploadUserImage(req, res, (error) => {
+    if (error) {
+      return errorHandler({ message: error.message, res });
+    }
+    next();
+  });
+};
 
 //Create a new user (Register a new user)
 const register = async (req, res) => {
@@ -192,4 +217,67 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-module.exports = { register, login, getUser, getCurrentUser, getAllUsers };
+//Update User
+const updateUser = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const { name, email, username, phone } = req.body;
+
+    const emailAlreadyExists = await User.findOne({ email: email.trim() });
+    if (emailAlreadyExists) {
+      if (emailAlreadyExists._id.toString() !== userId) {
+        return res.status(400).send({
+          success: false,
+          message: "Email is already registered.",
+          data: null,
+        });
+      }
+    }
+
+    const userNameNotAvailable = await User.findOne({
+      userName: username.trim(),
+    });
+    if (userNameNotAvailable) {
+      if (userNameNotAvailable._id.toString() !== userId) {
+        return res.status(400).send({
+          success: false,
+          message: "Username is already taken.",
+          data: null,
+        });
+      }
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      {
+        name,
+        username,
+        email,
+        phone,
+        profilePic: req.file && `${req.file.path}`,
+      },
+      { new: true }
+    );
+
+    if (updatedUser) {
+      return res.status(200).send({
+        success: true,
+        message: "Profile updated successfully",
+        data: updatedUser,
+      });
+    }
+  } catch (error) {
+    errorHandler({ error, res });
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  getUser,
+  getCurrentUser,
+  getAllUsers,
+  updateUser,
+  userImageMiddleware,
+};
