@@ -22,10 +22,10 @@ import UpdateEvent from "./pages/UpdateEvent";
 import Messages from "./pages/Messages";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContextProvider";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
-  console.log(isLoggedIn);
   const ProtectedRoute = ({ children }) => {
     if (!isLoggedIn) {
       return <Navigate to="/login" />;
@@ -49,6 +49,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/profile/edit/:id",
+          element: (
+            <ProtectedRoute>
+              <EditProfile />
             </ProtectedRoute>
           ),
         },
