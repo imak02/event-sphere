@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContextProvider";
 import Modal from "../components/Modal";
 
 const EventDetails = () => {
-  const [event, setEvent] = useState({});
+  const [event, setEvent] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
   const params = useParams();
@@ -51,6 +51,8 @@ const EventDetails = () => {
 
   const isAdmitted = event?.users?.includes(userId);
 
+  const isEnded = new Date(event?.date) < new Date();
+
   return (
     <div className="flex items-center justify-center relative">
       {showModal && (
@@ -90,41 +92,45 @@ const EventDetails = () => {
             </div>
           )}
           <h1 className="font-bold font-serif text-2xl md:text-4xl text-center">
-            {event.title}
+            {event?.title}
           </h1>
         </div>
         <div className="md:h-[70vh] p-2 ">
           <img
             className="h-full w-full object-cover"
-            src={import.meta.env.VITE_BACKEND_API + event.image}
+            src={import.meta.env.VITE_BACKEND_API + event?.image}
             alt="event"
           />
         </div>
         <div className="py-5 flex flex-col items-start md:flex-row justify-between md:items-center">
           <div className="p-2 text-lg font-serif text-slate-700 font-medium">
             <i className="fa-solid fa-gears mr-1 text-orange-500 w-8"></i>
-            Organized By: {event.organizer}
+            Organized By: {event?.organizer}
           </div>
           <div className="p-2 text-lg font-serif text-slate-700 font-medium">
             <i className="fa-solid fa-location-dot mr-1 text-orange-500 w-8"></i>
-            {event.location}
+            {event?.location}
           </div>
           <div className="p-2 text-lg font-serif text-slate-700 font-medium">
             <i className="fa-solid fa-calendar-days mr-1 text-orange-500 w-8"></i>
-            {new Date(event.date).toDateString()}
+            {new Date(event?.date).toDateString()}
           </div>
         </div>
         <div
           className="p-2"
-          dangerouslySetInnerHTML={{ __html: event.details }}
+          dangerouslySetInnerHTML={{ __html: event?.details }}
         ></div>
         <div className="flex items-center justify-end my-5">
           <button
             className="bg-orange-500 px-4 py-2 rounded-sm text-white font-bold hover:bg-orange-600 m-2 disabled:bg-gray-600"
             onClick={admitToEvent}
-            disabled={isAdmitted}
+            disabled={isAdmitted || isEnded}
           >
-            {isAdmitted ? "Already Admitted" : "Admit to Event"}
+            {isEnded
+              ? "Event ended"
+              : isAdmitted
+              ? "Already Admitted"
+              : "Admit to Event"}
           </button>
         </div>
       </div>

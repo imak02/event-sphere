@@ -70,6 +70,11 @@ const Profile = () => {
               </h2>
 
               <div className="flex items-center justify-around gap-20 flex-wrap">
+                {user?.events?.length <= 0 && (
+                  <h2 className="font-serif text-red-500 text-xl">
+                    You have not admitted to any events!
+                  </h2>
+                )}
                 {user?.events?.map((event, index) => (
                   <EventGridCard
                     id={event._id}

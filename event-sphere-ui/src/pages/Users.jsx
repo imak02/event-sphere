@@ -35,7 +35,7 @@ const Users = () => {
               <td className="border border-slate-300 p-3">{user.email}</td>
               <td className="border border-slate-300 p-3">{user.username}</td>
               <td className="border border-slate-300 p-3">{user.phone}</td>
-              <td className="border border-slate-300 p-3">
+              <td className="border border-slate-300 p-3 break-all">
                 {user.events.toString()}
               </td>
               <td className="border border-slate-300 p-3">{user.role}</td>

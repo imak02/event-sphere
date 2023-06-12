@@ -81,7 +81,7 @@ userSchema.methods.generateToken = function () {
     { _id: this._id, role: this.role },
     process.env.JWT_SECRET,
     {
-      expiresIn: "24h",
+      expiresIn: "7d",
     }
   );
   return token;
