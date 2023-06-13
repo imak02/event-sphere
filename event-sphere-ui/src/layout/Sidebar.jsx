@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 const Sidebar = () => {
+  const authCtx = useContext(AuthContext);
+
+  const logout = () => {
+    authCtx.logout();
+  };
   return (
     <div className="p-2">
       <div className="flex items-center justify-start m-4 ">
@@ -67,10 +73,10 @@ const Sidebar = () => {
         </ul>
       </div>
       <hr />
-      <div className="p-4  font-bold font-serif text-2xl ">
-        <Link to="/admin" className=" hover:text-orange-500">
+      <div className="p-4  font-bold font-serif text-2xl cursor-pointer ">
+        <div onClick={logout} className=" hover:text-orange-500">
           <i className="fa-solid fa-right-from-bracket mr-5 w-10"></i>SignOut
-        </Link>
+        </div>
       </div>
     </div>
   );

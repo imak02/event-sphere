@@ -236,7 +236,7 @@ const updateUser = async (req, res) => {
     }
 
     const userNameNotAvailable = await User.findOne({
-      userName: username.trim(),
+      username: username.trim(),
     });
     if (userNameNotAvailable) {
       if (userNameNotAvailable._id.toString() !== userId) {
